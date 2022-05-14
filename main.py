@@ -20,23 +20,28 @@ def generate_frame():
         frame = jpeg.tobytes()
 
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
 def moveDrone(command):
+    print(f'Command: {command}')
+    print(f'Battery: {drone.get_battery()}')
+
     match command:
-        case 'button up':
+        case 'button_up':
             return None
-        case 'button down':
+        case 'button_down':
             return None
-        case 'button left':
+        case 'button_left':
             return None
-        case 'button right':
+        case 'button_right':
             return None
         case 'A':
             drone.takeoff()
+            return None
         case 'B':
             drone.land()
+            return None
         case 'X':
             return None
         case 'Y':
@@ -46,24 +51,32 @@ def moveDrone(command):
         case 'RB':
             return None
         case 'LT':
+            drone.move_down(20)
             return None
         case 'RT':
+            drone.move_up(20)
             return None
-        case 'left stick up':
+        case 'left_stick_up':
+            drone.move_forward(20)
             return None
-        case 'left stick down':
+        case 'left_stick_down':
+            drone.move_back(20)
             return None
-        case 'left stick right':
+        case 'left_stick_right':
+            drone.move_right(20)
             return None
-        case 'left stick left':
+        case 'left_stick_left':
+            drone.move_left(20)
             return None
-        case 'right stick up':
+        case 'right_stick_up':
             return None
-        case 'right stick down':
+        case 'right_stick_down':
             return None
-        case 'right stick right':
+        case 'right_stick_right':
+            drone.rotate_clockwise(30)
             return None
-        case 'right stick left':
+        case 'right_stick_left':
+            drone.rotate_counter_clockwise(30)
             return None
 
 
