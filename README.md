@@ -1,4 +1,4 @@
-# tello-gamepad
+# tello-gamepad (work in progress)
 ## 🎮🛸 fly tello drones with a gamepad
 
 *using the [JS Gamepad API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API), [Flask](https://flask.palletsprojects.com/en/2.1.x/), and [DJITelloPy](https://github.com/damiafuentes/DJITelloPy/)*
