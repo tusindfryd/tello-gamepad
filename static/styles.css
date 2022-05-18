@@ -13,7 +13,14 @@ main {
     min-width: 480px;
 }
 
+div {
+    padding: 20px;
+}
+
 img {
+    background-image:url("../static/spinner.gif");
+    background-repeat: no-repeat;
+    background-position: center;
     border-radius: 10px;
     object-fit: scale-down;
     width: 480px;
