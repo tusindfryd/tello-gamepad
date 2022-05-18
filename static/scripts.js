@@ -5,7 +5,7 @@ let buttonEvent = (button) => {
         })
 }
 
-gameControl.on('connect', function (gamepad) {
+gameControl.on('connect', (gamepad) => {
         // d-pad
         gamepad.after('button12', () => {
             buttonEvent("button_up")
@@ -79,14 +79,14 @@ gameControl.on('connect', function (gamepad) {
         // gamepad visualization
 
         for (let x = 0; x < Math.min(17, gamepad.buttons); x++) {
-            gamepad.on('button' + x, function () {
+            gamepad.on('button' + x, () => {
                 document.querySelector('#button-' + x).classList.toggle('active', true);
             });
         }
         for (let x = 0; x < Math.min(2, gamepad.axes); x++) {
             const directions = ['up', 'down', 'right', 'left'];
             for (let d = 0; d < directions.length; d++) {
-                gamepad.on(directions[d] + x, function () {
+                gamepad.on(directions[d] + x, () => {
                     document
                         .querySelector('#axe-' + x + '-' + directions[d])
                         .classList.toggle('active', true);
@@ -94,7 +94,7 @@ gameControl.on('connect', function (gamepad) {
             }
         }
     })
-    .on('beforeCycle', function () {
+    .on('beforeCycle', () => {
         const active = document.querySelectorAll('.active');
         for (let x = 0; x < active.length; x++) {
             active[x].classList.toggle('active', false);
