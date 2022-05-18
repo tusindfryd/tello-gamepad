@@ -12,15 +12,21 @@ drone.streamon()
 
 
 def generate_frame():
+    counter = 1
+
     while True:
-        image = drone.get_frame_read().frame
-        image = cv2.resize(image, (480, 360))
-        ret, jpeg = cv2.imencode('.jpg', image)
+        if counter % 100 == 0:
+            counter = 1
+            image = drone.get_frame_read().frame
+            image = cv2.resize(image, (480, 360))
+            ret, jpeg = cv2.imencode('.jpg', image)
 
-        frame = jpeg.tobytes()
+            frame = jpeg.tobytes()
 
-        yield (b'--frame\r\n'
-            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+        else:
+            counter = counter + 1
 
 
 def moveDrone(command):
@@ -82,8 +88,6 @@ def moveDrone(command):
 
 @app.route('/stream')
 def video_feed():
-    global video
-
     return Response(generate_frame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
